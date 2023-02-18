@@ -1,8 +1,6 @@
-import javax.xml.crypto.dsig.keyinfo.KeyValue;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
-
+import java.io.PrintWriter;
 
 
 public class Main {
@@ -11,6 +9,7 @@ public class Main {
     public static ArrayList<Integer> arrayPrice = new ArrayList<>();
     public static void main(String[] args) throws IOException
         {
+            PrintWriter out = new PrintWriter("output.txt");
             String market;
             int counterPrice = 0;
             int offsetPrice = 0;
@@ -36,6 +35,7 @@ public class Main {
                 br = null;
                 br1 = null;
                 System.out.println("Error, input files not found");
+                System.exit(0);
             }
 
 
@@ -44,7 +44,7 @@ public class Main {
 
 //               System.out.println(market);
                String[] keyValueMarket = market.split(" ");
-               if(keyValueMarket.length > 1 && keyValueMarket.length < 3){
+               if(keyValueMarket.length == 2){
                    String key = keyValueMarket[0];
                    if(Character.isDigit(keyValueMarket[1].toCharArray()[1]) & (Integer.parseInt(keyValueMarket[1]) > 0)){
                        int value = Integer.parseInt(keyValueMarket[1]);
@@ -81,27 +81,27 @@ public class Main {
                     String[] keyValuePrice = price.split(" ");
                     if (Character.isDigit(keyValuePrice[0].toCharArray()[0])) {
                         offsetPrice = Integer.parseInt(keyValuePrice[0]);  //To count input lines we received in keyValuePrice[0]
-                        counterPrice = 0;
+//                        counterPrice = 0;
                         arrayPrice.add(Integer.parseInt(keyValuePrice[1]));
                         indexArrayList = arrayPrice.size() - 1;
 //                        mapPrice[Integer.parseInt(keyValuePrice[1])] = new HashMap<>();
                         mapPrice.put(indexArrayList, new HashMap<>());
-                    } else if(!Character.isDigit(keyValuePrice[0].toCharArray()[0]) && keyValuePrice.length > 1 && keyValuePrice.length < 3 ) {
+                    } else if(!Character.isDigit(keyValuePrice[0].toCharArray()[0]) & keyValuePrice.length == 2 & Character.isDigit(keyValuePrice[1].toCharArray()[1])) {
                         if (counterPrice <= offsetPrice) {
                             String[] ValuePrice = price.split(" ");
 
-                            if (counterPrice == 1) {
-
-                                HashMap<String, Integer> tempMap = new HashMap<>();
-                                tempMap.put(ValuePrice[0], Integer.parseInt(ValuePrice[1]));
-                                mapPrice.put(indexArrayList, tempMap);
-
-                            } else {
+//                            if (counterPrice == 1) {
+//
+//                                HashMap<String, Integer> tempMap = new HashMap<>();
+//                                tempMap.put(ValuePrice[0], Integer.parseInt(ValuePrice[1]));
+//                                mapPrice.put(indexArrayList, tempMap);
+//
+//                            } else {
                                 mapPrice.get(indexArrayList).put(ValuePrice[0], Integer.parseInt(ValuePrice[1]));
-                            }
+//                            }
                         }
                     }else {
-                        System.out.println("Invalid Price List");
+                        out.println("Invalid Price List");
                     }
 
                 }
