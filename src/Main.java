@@ -7,6 +7,9 @@ public class Main {
     public static HashMap<String, Integer> mapMarket;
     public static HashMap<Integer, HashMap<String, Integer>> mapPrice = new HashMap<>();
     public static ArrayList<Integer> arrayPrice = new ArrayList<>();
+
+
+   public static int checkerSize;
     public static void main(String[] args) throws IOException
         {
             PrintWriter out = new PrintWriter("output.txt");
@@ -87,8 +90,9 @@ public class Main {
 //                        mapPrice[Integer.parseInt(keyValuePrice[1])] = new HashMap<>();
                         mapPrice.put(indexArrayList, new HashMap<>());
                     } else if(!Character.isDigit(keyValuePrice[0].toCharArray()[0]) & keyValuePrice.length == 2 & Character.isDigit(keyValuePrice[1].toCharArray()[1])) {
-                        if (counterPrice <= offsetPrice) {
-                            String[] ValuePrice = price.split(" ");
+
+                            if (counterPrice <= offsetPrice) {
+                                String[] ValuePrice = price.split(" ");
 
 //                            if (counterPrice == 1) {
 //
@@ -99,17 +103,23 @@ public class Main {
 //                            } else {
                                 mapPrice.get(indexArrayList).put(ValuePrice[0], Integer.parseInt(ValuePrice[1]));
 //                            }
-                        }
+                            }
+
                     }else {
                         out.println("Invalid Price List");
                     }
 
                 }
             }
+
+
+//
+//                mapPrice.remove(a);
+//            }
 //            System.out.println("Array Price" + arrayPrice);
-//            System.out.println(mapPrice);
+
             BruteForce bf = new BruteForce();
-            bf.BruteForce(mapPrice, arrayPrice, mapMarket).toString();
+            bf.BruteForce(mapPrice, arrayPrice, mapMarket);
 //            Solution s = new Solution();
 //            System.out.println("\n");
 //            int[] n = {202,120,80};
