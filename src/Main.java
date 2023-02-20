@@ -7,12 +7,13 @@ public class Main {
     public static HashMap<String, Integer> mapMarket;
     public static HashMap<Integer, HashMap<String, Integer>> mapPrice = new HashMap<>();
     public static ArrayList<Integer> arrayPrice = new ArrayList<>();
+    public static ArrayList<Integer> priceCounter = new ArrayList<>();
 
 
-   public static int checkerSize;
+
     public static void main(String[] args) throws IOException
         {
-            PrintWriter out = new PrintWriter("output.txt");
+            PrintWriter out = new PrintWriter("output1.txt");
             String market;
             int counterPrice = 0;
             int offsetPrice = 0;
@@ -85,6 +86,7 @@ public class Main {
                     if (Character.isDigit(keyValuePrice[0].toCharArray()[0])) {
                         offsetPrice = Integer.parseInt(keyValuePrice[0]);  //To count input lines we received in keyValuePrice[0]
 //                        counterPrice = 0;
+                        priceCounter.add(Integer.parseInt(keyValuePrice[0]));
                         arrayPrice.add(Integer.parseInt(keyValuePrice[1]));
                         indexArrayList = arrayPrice.size() - 1;
 //                        mapPrice[Integer.parseInt(keyValuePrice[1])] = new HashMap<>();
@@ -93,16 +95,7 @@ public class Main {
 
                             if (counterPrice <= offsetPrice) {
                                 String[] ValuePrice = price.split(" ");
-
-//                            if (counterPrice == 1) {
-//
-//                                HashMap<String, Integer> tempMap = new HashMap<>();
-//                                tempMap.put(ValuePrice[0], Integer.parseInt(ValuePrice[1]));
-//                                mapPrice.put(indexArrayList, tempMap);
-//
-//                            } else {
                                 mapPrice.get(indexArrayList).put(ValuePrice[0], Integer.parseInt(ValuePrice[1]));
-//                            }
                             }
 
                     }else {
@@ -113,17 +106,8 @@ public class Main {
             }
 
 
-//
-//                mapPrice.remove(a);
-//            }
-//            System.out.println("Array Price" + arrayPrice);
-
             BruteForce bf = new BruteForce();
-            bf.BruteForce(mapPrice, arrayPrice, mapMarket);
-//            Solution s = new Solution();
-//            System.out.println("\n");
-//            int[] n = {202,120,80};
-//            System.out.println(s.subsets(n, 200));
+            bf.BruteForce(mapPrice, arrayPrice, mapMarket, priceCounter);
 
         }
     }

@@ -6,17 +6,15 @@ import java.io.PrintWriter;
 
 
 public class BruteForce {
-    public static void BruteForce(HashMap<Integer, HashMap<String, Integer>> map, ArrayList<Integer> weight, HashMap<String, Integer> map2) throws FileNotFoundException {
+    public static void BruteForce(HashMap<Integer, HashMap<String, Integer>> map, ArrayList<Integer> weight, HashMap<String, Integer> map2, ArrayList<Integer> priceCounter) throws FileNotFoundException {
         PrintWriter out = new PrintWriter("output.txt");
 
 
                //declarations
-               int maxProfit = 0; //store max profit
-               HashMap<Integer, HashMap<String, Integer>> map3 = new HashMap<>();
+
+
                Set<Integer> s = map.keySet(); //store current set
-               Set<String> m = Collections.emptySet(); //Store final output set
-               ArrayList output = new ArrayList();
-               Set<String> cards = new HashSet<>();
+
 
                ArrayList<Integer> sum;
                ArrayList<String> listCardsOutput;
@@ -55,7 +53,10 @@ public class BruteForce {
                        ArrayList<String> keys = new ArrayList<>(var.keySet());
                        int countSimp = 0;
                        int countSimpKey = 0;
-
+                       int priceValCount = 0;
+                       if(priceCounter.get(index) != var.size()){
+                           priceValCount++;
+                       }
                        for (int r = 0; r < var.size(); r++) {
                            if (sum.get(r) < 0) {
                                countSimp++;
@@ -63,9 +64,10 @@ public class BruteForce {
                            if(!(map2.containsKey(keys.get(r)))){
                                countSimpKey++;
                            }
+
                        }
 
-                       if (countSimp > 0 || countSimpKey > 0) {
+                       if ((countSimp > 0) || (countSimpKey > 0) || (priceValCount > 0)) {
                            out.println("Invalid Price List");
                        } else {
                            maxProfitSimp = 0;
