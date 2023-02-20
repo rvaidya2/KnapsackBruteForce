@@ -107,7 +107,7 @@ public class Main {
 
 
             BruteForce bf = new BruteForce();
-            bf.BruteForce(mapPrice, arrayPrice, mapMarket, priceCounter);
+            bf.BruteForceMethod(mapPrice, arrayPrice, mapMarket, priceCounter);
             out.close();
 
         }

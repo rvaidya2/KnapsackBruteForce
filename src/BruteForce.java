@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 
 
 public class BruteForce {
-    public static void BruteForce(HashMap<Integer, HashMap<String, Integer>> map, ArrayList<Integer> weight, HashMap<String, Integer> map2, ArrayList<Integer> priceCounter) throws FileNotFoundException {
+    public static void BruteForceMethod(HashMap<Integer, HashMap<String, Integer>> map, ArrayList<Integer> weight, HashMap<String, Integer> map2, ArrayList<Integer> priceCounter) throws FileNotFoundException {
         PrintWriter out = new PrintWriter("output.txt");
 
 
